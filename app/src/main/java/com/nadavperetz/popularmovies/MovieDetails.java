@@ -37,7 +37,7 @@ public class MovieDetails extends AppCompatActivity {
             String poster_path = jsonObject.getString("backdrop_path");
             String overview = jsonObject.getString("overview");
             String release_date = jsonObject.getString("release_date");
-            String vote_average = jsonObject.getString("vote_average");
+            String vote_average = jsonObject.getString("vote_average") + " /10";
 
             TextView movie_title = (TextView) findViewById(R.id.movie_title);
             movie_title.setText(original_title);
@@ -50,7 +50,7 @@ public class MovieDetails extends AppCompatActivity {
 
 
             TextView text_release_date = (TextView) findViewById(R.id.release_date);
-            text_release_date.setText(release_date);
+            text_release_date.setText(release_date.split("-")[0]);
 
             ImageView movie_image = (ImageView) findViewById(R.id.movie_image);
 

@@ -40,7 +40,10 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/interestelar"
             android:id="@+id/movie_image"
-            android:contentDescription="@string/movie_image" />
+            android:contentDescription="@string/movie_image"
+            android:paddingLeft="24dp"
+            android:paddingTop="24dp"
+            android:paddingRight="24dp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -55,7 +58,7 @@
                 android:text="@string/release_date"
                 android:textSize="24sp"
                 android:textStyle="normal|bold"
-                />
+                android:paddingTop="24dp" />
 
 
             <TextView
@@ -66,7 +69,8 @@
                 android:textSize="18sp"
                 android:textStyle="normal|bold"
                 android:textColor="@color/colorPrimaryDark"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:paddingTop="24dp" />
 
         </LinearLayout>
     </LinearLayout>
