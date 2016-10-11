@@ -54,11 +54,11 @@ public class MovieDetails extends AppCompatActivity {
 
             ImageView movie_image = (ImageView) findViewById(R.id.movie_image);
 
-
+            Log.v(LOG_TAG, "http://image.tmdb.org/t/p/w185" + poster_path);
             Picasso.with(getApplicationContext())
-                    .load("http://image.tmdb.org/t/p/w185/" + poster_path)
+                    .load("http://image.tmdb.org/t/p/w185" + poster_path)
                     .centerCrop()
-                    .resize(600,  800)
+                    .resize(400,  600)
                     .into(movie_image);
 
         }catch (JSONException e){
