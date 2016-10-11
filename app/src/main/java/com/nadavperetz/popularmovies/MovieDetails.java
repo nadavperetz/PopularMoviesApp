@@ -34,7 +34,7 @@ public class MovieDetails extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(movieDetails);
             String original_title = jsonObject.getString("original_title");
 
-            String poster_path = jsonObject.getString("backdrop_path");
+            String poster_path = jsonObject.getString("poster_path");
             String overview = jsonObject.getString("overview");
             String release_date = jsonObject.getString("release_date");
             String vote_average = jsonObject.getString("vote_average") + " /10";

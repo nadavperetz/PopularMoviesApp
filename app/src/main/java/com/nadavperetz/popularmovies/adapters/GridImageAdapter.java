@@ -65,7 +65,7 @@ public class GridImageAdapter extends BaseAdapter {
     private String getUrl(int position) {
         try {
             JSONObject movie = new JSONObject(moviesList[position]);
-            String path = movie.getString("backdrop_path");
+            String path = movie.getString("poster_path");
             return "http://image.tmdb.org/t/p/w185/" + path;
         }
         catch (JSONException e){
