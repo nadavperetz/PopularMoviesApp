@@ -1,7 +1,10 @@
 package com.nadavperetz.popularmovies;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.nadavperetz.popularmovies.adapters.GridImageAdapter;
 import com.nadavperetz.popularmovies.tasks.FetchMoviesList;
@@ -38,10 +42,12 @@ public class MainActivity extends AppCompatActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                String movieList = mMoviesAdapter.getItem(position);
-                Intent intent = new Intent(getApplicationContext(), MovieDetails.class)
-                        .putExtra(Intent.EXTRA_TEXT, movieList);
-                startActivity(intent);
+                if (checkConnectivity()) {
+                    String movieList = mMoviesAdapter.getItem(position);
+                    Intent intent = new Intent(getApplicationContext(), MovieDetails.class)
+                            .putExtra(Intent.EXTRA_TEXT, movieList);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -82,9 +88,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateMovieList(){
-        FetchMoviesList fetchMoviesList = new FetchMoviesList(
-                sharedPrefs.getString(sort_type, sort_by_popularity), mMoviesAdapter);
-        fetchMoviesList.execute();
+        if (checkConnectivity()) {
+            FetchMoviesList fetchMoviesList = new FetchMoviesList(
+                    sharedPrefs.getString(sort_type, sort_by_popularity), mMoviesAdapter);
+            fetchMoviesList.execute();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean checkConnectivity(){
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
+
     }
 }
 
